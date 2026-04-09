@@ -55,7 +55,7 @@ body::before {
 
 .display-title {
   font-family: var(--font-display);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .surface-panel {
@@ -146,9 +146,9 @@ body::before {
 .hero-board::after {
   content: "";
   position: absolute;
-  right: -6%;
-  top: -10%;
-  width: 44%;
+  right: -5%;
+  top: -8%;
+  width: 38%;
   aspect-ratio: 1;
   border-radius: 999px;
   background:
@@ -156,6 +156,86 @@ body::before {
     radial-gradient(circle at center, rgba(255, 179, 77, 0.06), transparent 70%);
   filter: blur(8px);
   pointer-events: none;
+}
+
+.hero-kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-title-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.hero-tech-lockup,
+.hero-mobile-tech {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.hero-mobile-tech {
+  display: none;
+}
+
+.hero-tech-line,
+.hero-kicker-line {
+  width: 72px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(91, 231, 255, 0.55), rgba(255, 255, 255, 0.08), transparent);
+}
+
+.hero-tech-label {
+  font-size: clamp(1.2rem, 1rem + 1vw, 2.2rem);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: rgba(236, 244, 255, 0.96);
+}
+
+.hero-signal-chip {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    rgba(8, 18, 29, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.hero-status-strip {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.hero-status-card {
+  border: 1px solid rgba(255, 255, 255, 0.035);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.008)),
+    rgba(8, 18, 29, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 1279px) {
+  .hero-title-row {
+    display: block;
+  }
+
+  .hero-tech-lockup {
+    display: none;
+  }
+
+  .hero-mobile-tech {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-status-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .hero-metric-card {
@@ -183,7 +263,7 @@ body::before {
 
 .metric-orb {
   position: relative;
-  width: min(280px, 72vw);
+  width: min(240px, 62vw);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -200,12 +280,12 @@ body::before {
 .metric-orb::before {
   border: 1px solid rgba(255, 179, 77, 0.12);
   box-shadow:
-    0 0 0 28px rgba(91, 231, 255, 0.06),
-    0 0 80px rgba(79, 166, 255, 0.12);
+    0 0 0 22px rgba(91, 231, 255, 0.06),
+    0 0 64px rgba(79, 166, 255, 0.11);
 }
 
 .metric-orb::after {
-  inset: 36px;
+  inset: 28px;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.12), rgba(22, 33, 48, 0.96));
   border: 1px solid rgba(255, 255, 255, 0.04);
@@ -215,7 +295,7 @@ body::before {
 .metric-orb-core {
   position: relative;
   z-index: 1;
-  width: 62%;
+  width: 64%;
   text-align: center;
 }
 

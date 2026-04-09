@@ -29,7 +29,16 @@ interface ScenarioLogItem {
   message: string;
 }
 
+interface DemoAuthSnapshot {
+  isAuthenticated: boolean;
+  loginName: string;
+  loginAt: string | null;
+}
+
 interface PowerStore {
+  isAuthenticated: boolean;
+  loginName: string;
+  loginAt: string | null;
   roleId: RoleId;
   selectedEventId: string | null;
   selectedAssetId: string | null;
@@ -41,6 +50,8 @@ interface PowerStore {
   activeScenarioId: string | null;
   scenarioTimeline: RuntimeScenarioStep[];
   scenarioLogs: ScenarioLogItem[];
+  loginDemo: (username: string) => void;
+  logoutDemo: () => void;
   setRole: (roleId: RoleId) => void;
   selectEvent: (eventId: string | null) => void;
   selectAsset: (assetId: string | null) => void;
@@ -55,6 +66,49 @@ interface PowerStore {
 const initialRoleId: RoleId = "shift-supervisor";
 const initialEventId = null;
 const scenarioTimers: number[] = [];
+const AUTH_STORAGE_KEY = "poweros-demo-auth";
+
+function readAuthSnapshot(): DemoAuthSnapshot {
+  if (typeof window === "undefined") {
+    return {
+      isAuthenticated: false,
+      loginName: "operator.demo",
+      loginAt: null,
+    };
+  }
+
+  try {
+    const raw = window.localStorage.getItem(AUTH_STORAGE_KEY);
+    if (!raw) {
+      return {
+        isAuthenticated: false,
+        loginName: "operator.demo",
+        loginAt: null,
+      };
+    }
+
+    const parsed = JSON.parse(raw) as Partial<DemoAuthSnapshot>;
+    return {
+      isAuthenticated: Boolean(parsed.isAuthenticated),
+      loginName: parsed.loginName || "operator.demo",
+      loginAt: parsed.loginAt || null,
+    };
+  } catch {
+    return {
+      isAuthenticated: false,
+      loginName: "operator.demo",
+      loginAt: null,
+    };
+  }
+}
+
+function writeAuthSnapshot(snapshot: DemoAuthSnapshot) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(snapshot));
+}
 
 function cloneAgents() {
   return mockAgents.map((agent) => ({ ...agent, explanationSummary: [...agent.explanationSummary] }));
@@ -93,6 +147,7 @@ function applyAgentStep(agents: AgentCard[], actorIds: string[], stepIndex: numb
 }
 
 export const usePowerStore = create<PowerStore>((set, get) => ({
+  ...readAuthSnapshot(),
   roleId: initialRoleId,
   selectedEventId: initialEventId,
   selectedAssetId: assets[0]?.id ?? null,
@@ -110,6 +165,39 @@ export const usePowerStore = create<PowerStore>((set, get) => ({
       message: "PowerOS 已进入 Demo 模式，等待新的智能体协同剧本触发。",
     },
   ],
+  loginDemo: (username) => {
+    const snapshot: DemoAuthSnapshot = {
+      isAuthenticated: true,
+      loginName: username.trim() || "operator.demo",
+      loginAt: new Date().toISOString(),
+    };
+
+    writeAuthSnapshot(snapshot);
+    set(snapshot);
+  },
+  logoutDemo: () => {
+    const snapshot: DemoAuthSnapshot = {
+      isAuthenticated: false,
+      loginName: "operator.demo",
+      loginAt: null,
+    };
+
+    writeAuthSnapshot(snapshot);
+    clearTimers();
+    set({
+      ...snapshot,
+      activeScenarioId: null,
+      scenarioTimeline: [],
+      agents: cloneAgents(),
+      scenarioLogs: [
+        {
+          id: `log-logout-${Date.now()}`,
+          time: nowLabel(),
+          message: "已退出当前演示账号，系统回到登录入口。",
+        },
+      ],
+    });
+  },
   setRole: (roleId) => set({ roleId }),
   selectEvent: (selectedEventId) => set({ selectedEventId }),
   selectAsset: (selectedAssetId) => set({ selectedAssetId }),

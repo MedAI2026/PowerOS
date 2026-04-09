@@ -17,11 +17,11 @@ export default function PageHeader({
         <p className="text-[10px] uppercase tracking-[0.38em] text-cyan-200/58">
           PowerOS Workspace
         </p>
-        <h1 className="display-title mt-4 text-[2.9rem] font-semibold tracking-tight text-white md:text-[4rem]">
+        <h1 className="display-title mt-4 text-[2.2rem] font-semibold tracking-tight text-white md:text-[3rem]">
           {title}
         </h1>
         <div className="section-divider mt-5 max-w-3xl" />
-        <p className="mt-5 max-w-3xl text-sm leading-8 text-slate-300 md:text-[15px]">
+        <p className="mt-5 max-w-3xl text-[14px] leading-8 text-slate-300 md:text-[15px]">
           {description}
         </p>
       </div>

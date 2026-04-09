@@ -32,6 +32,8 @@ const navItems = [
 export default function AppShell() {
   const location = useLocation();
   const roleId = usePowerStore((state) => state.roleId);
+  const loginName = usePowerStore((state) => state.loginName);
+  const logoutDemo = usePowerStore((state) => state.logoutDemo);
   const role = roleProfiles.find((item) => item.id === roleId) ?? roleProfiles[0];
   const isDashboard = location.pathname === "/";
 
@@ -49,10 +51,10 @@ export default function AppShell() {
               <p className="text-[10px] uppercase tracking-[0.38em] text-cyan-200/64">
                 PowerOS
               </p>
-              <h1 className="display-title mt-4 text-[2.2rem] font-semibold leading-[0.94] text-white">
+              <h1 className="display-title mt-4 max-w-[9.5rem] text-[1.72rem] font-semibold leading-[0.96] text-white">
                 电厂智能体原生操作系统
               </h1>
-              <p className="mt-4 text-sm leading-7 text-slate-300">
+              <p className="mt-4 text-[15px] leading-8 text-slate-300">
                 以事件为中心、以智能体为能力中枢、以现场闭环为价值输出。
               </p>
             </div>
@@ -67,7 +69,7 @@ export default function AppShell() {
                     end={item.to === "/"}
                     className={({ isActive }) =>
                       cn(
-                        "group flex items-center gap-3 rounded-[20px] px-4 py-3.5 text-sm transition",
+                        "group flex items-center gap-3 rounded-[20px] px-4 py-3.5 text-[13px] transition",
                         isActive
                           ? "bg-white/[0.09] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
                           : "text-slate-400 hover:bg-white/[0.035] hover:text-white",
@@ -102,7 +104,22 @@ export default function AppShell() {
                   <span className="h-px w-16 bg-gradient-to-r from-cyan-300/30 to-transparent" />
                   <span className="text-slate-500">{role.title}</span>
                 </div>
-                <RoleSwitcher />
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="surface-card-soft rounded-full px-4 py-2">
+                    <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+                      登录用户
+                    </div>
+                    <div className="mt-1 text-sm font-medium text-white">{loginName}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={logoutDemo}
+                    className="surface-button rounded-full px-4 py-3 text-xs font-medium text-slate-200"
+                  >
+                    退出演示
+                  </button>
+                  <RoleSwitcher />
+                </div>
               </div>
 
               <nav className="flex flex-wrap gap-2">
@@ -133,7 +150,7 @@ export default function AppShell() {
                     PowerOS Runtime
                   </div>
                   <div className="mt-4 flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
-                    <h2 className="display-title text-[2.4rem] font-semibold leading-[0.95] text-white md:text-[3rem]">
+                    <h2 className="display-title text-[1.92rem] font-semibold leading-[0.98] text-white md:text-[2.45rem]">
                       事件即入口 · 智能体即能力中心
                     </h2>
                     <span className="self-start rounded-full bg-white/[0.06] px-3 py-1 text-[11px] text-slate-300 ring-1 ring-inset ring-white/8">
@@ -141,11 +158,26 @@ export default function AppShell() {
                     </span>
                   </div>
                   <div className="section-divider mt-5 max-w-4xl" />
-                  <p className="mt-5 max-w-4xl text-sm leading-8 text-slate-300">
+                  <p className="mt-5 max-w-4xl text-[15px] leading-8 text-slate-300">
                     这不是传统 MIS 或 BI 看板。PowerOS 会理解当前态势、组织协同链路、给出建议行动，并把设备、作业、人员和现场放进同一套实时上下文中。
                   </p>
                 </div>
-                <RoleSwitcher />
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="surface-card-soft rounded-full px-4 py-2">
+                    <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+                      登录用户
+                    </div>
+                    <div className="mt-1 text-sm font-medium text-white">{loginName}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={logoutDemo}
+                    className="surface-button rounded-full px-4 py-3 text-xs font-medium text-slate-200"
+                  >
+                    退出演示
+                  </button>
+                  <RoleSwitcher />
+                </div>
               </div>
             </header>
           )}

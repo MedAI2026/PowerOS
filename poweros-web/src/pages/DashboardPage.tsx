@@ -47,6 +47,18 @@ const workspaceTabs: Array<{ id: WorkspaceTab; label: string }> = [
   { id: "observability", label: "观测" },
 ];
 
+const heroSignals = [
+  "事件驱动运行",
+  "智能体协同编排",
+  "生产经营一体联动",
+];
+
+const heroStatusCards = [
+  { label: "在线智能体", value: "5", detail: "运行 / 设备 / 安全 / 现场 / 协调" },
+  { label: "高优事件", value: "4", detail: "跨设备、作业与经营影响联动" },
+  { label: "当前模式", value: "联动演示", detail: "建议优先展示跨域协同剧本" },
+];
+
 const quickLinks = [
   {
     to: "/events",
@@ -161,49 +173,95 @@ export default function DashboardPage() {
     <div className="pb-8">
       <section className="hero-board surface-panel rounded-[40px] p-5 md:p-7 xl:p-10">
         <div className="relative z-[1]">
-          <div className="grid gap-8 xl:grid-cols-[1.25fr_0.75fr] xl:items-start">
-            <div>
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.52fr)_280px] xl:items-center xl:gap-6">
+            <div className="max-w-[1080px]">
               <div className="text-[10px] uppercase tracking-[0.4em] text-cyan-200/70">
                 POWEROS / NEXUS POWER
               </div>
-              <div className="mt-6 max-w-5xl">
-                <div className="display-title text-[3.4rem] font-semibold leading-[0.86] text-white sm:text-[4.4rem] xl:text-[5.9rem]">
+              <div className="mt-6 max-w-[980px]">
+                <div className="display-title text-[2.3rem] font-semibold leading-[0.92] text-white sm:text-[3rem] xl:text-[4.05rem]">
                   智慧电厂
                 </div>
-                <div className="display-title text-[3.4rem] font-semibold leading-[0.86] text-white sm:text-[4.4rem] xl:text-[5.9rem]">
-                  领航看板 <span className="ml-2">Agentic-Mesh</span>
+                <div className="hero-title-row">
+                  <div className="display-title text-[2.3rem] font-semibold leading-[0.92] text-white sm:text-[3rem] xl:text-[4.05rem]">
+                    领航看板
+                  </div>
+                  <div className="hero-tech-lockup">
+                    <span className="hero-tech-line" />
+                    <span className="hero-tech-label">Agentic-Mesh</span>
+                  </div>
+                </div>
+                <div className="hero-mobile-tech mt-3">
+                  <span className="hero-tech-line" />
+                  <span className="hero-tech-label">Agentic-Mesh</span>
+                </div>
+                <div className="mt-4 text-[13px] tracking-[0.08em] text-slate-400">
+                  智能体协同架构驱动的电厂实时决策工作台
                 </div>
               </div>
-              <p className="mt-6 max-w-4xl text-sm leading-8 text-slate-300 md:text-[15px]">
+              <p className="mt-5 max-w-3xl text-[14px] leading-8 text-slate-300 md:text-[15px]">
                 通过语义总线、多智能体协作和生成式分析画布，把生产管控与经营决策压缩到同一条实时认知链路里。这一页就是 PowerOS 的“舞台模式”，用于向客户呈现未来电厂智能操作系统的主界面形态。
               </p>
+
+              <div className="hero-status-strip mt-6">
+                {heroStatusCards.map((item) => (
+                  <div key={item.label} className="hero-status-card rounded-[22px] p-4">
+                    <div className="text-[11px] uppercase tracking-[0.18em] text-slate-500">
+                      {item.label}
+                    </div>
+                    <div className="mt-3 flex items-end gap-2">
+                      <span className="display-title text-[1.55rem] font-semibold leading-none text-white">
+                        {item.value}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[13px] leading-6 text-slate-400">{item.detail}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {heroSignals.map((signal) => (
+                  <span
+                    key={signal}
+                    className="hero-signal-chip rounded-full px-3.5 py-2 text-[12px] font-medium text-slate-200"
+                  >
+                    {signal}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="flex justify-center xl:justify-end">
-              <div className="metric-orb">
-                <div className="metric-orb-core">
-                  <div className="text-[1rem] font-medium tracking-[0.04em] text-slate-300">
-                    实时联动
+            <div className="flex items-start justify-center xl:justify-center">
+              <div className="space-y-4">
+                <div className="metric-orb">
+                  <div className="metric-orb-core">
+                    <div className="text-[0.85rem] font-medium tracking-[0.04em] text-slate-300">
+                      实时联动
+                    </div>
+                    <div className="display-title mt-4 text-[2.3rem] font-semibold leading-[0.92] text-white">
+                      119.4
+                    </div>
+                    <div className="display-title text-[1.35rem] font-semibold leading-none text-white">
+                      元/MWh
+                    </div>
+                    <div className="mt-3 text-[12px] text-slate-400">当前获利能力</div>
                   </div>
-                  <div className="display-title mt-5 text-[3.2rem] font-semibold leading-[0.88] text-white">
-                    119.4
-                  </div>
-                  <div className="display-title text-[2rem] font-semibold leading-none text-white">
-                    元/MWh
-                  </div>
-                  <div className="mt-4 text-sm text-slate-400">当前获利能力</div>
+                </div>
+
+                <div className="surface-card-soft rounded-[22px] px-4 py-3 text-sm text-slate-300">
+                  边际收益较昨日同时间段提升 12%，当前建议优先展示跨域协同剧本。
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="surface-card mt-8 rounded-[32px] p-5 md:p-6">
+          <div className="surface-card mt-7 rounded-[32px] p-5 md:p-6">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.38em] text-cyan-200/68">
                   Generative Interface
                 </p>
-                <h2 className="mt-3 text-[2rem] font-semibold leading-none text-white">
+                <h2 className="mt-3 text-[1.5rem] font-semibold leading-none text-white">
                   对话式任务注入
                 </h2>
               </div>
@@ -279,11 +337,11 @@ export default function DashboardPage() {
             {heroMetrics.map((metric) => (
               <article key={metric.id} className="hero-metric-card rounded-[30px] p-5">
                 <p className="text-[12px] tracking-[0.02em] text-slate-400">{metric.label}</p>
-                <div className="mt-5">
-                  <strong className="display-title text-[2.5rem] font-semibold leading-none text-white">
+                <div className="mt-4">
+                  <strong className="display-title text-[2rem] font-semibold leading-none text-white">
                     {metric.value}
                   </strong>
-                  <div className={`mt-2 text-[1.05rem] font-semibold ${metricToneMap[metric.tone]}`}>
+                  <div className={`mt-1.5 text-[0.95rem] font-semibold ${metricToneMap[metric.tone]}`}>
                     {metric.delta}
                   </div>
                 </div>
@@ -297,7 +355,7 @@ export default function DashboardPage() {
                 <div className="text-[10px] uppercase tracking-[0.38em] text-cyan-200/68">
                   Adaptive Workspace
                 </div>
-                <h2 className="mt-3 text-[1.8rem] font-semibold text-white">
+                <h2 className="mt-3 text-[1.45rem] font-semibold text-white">
                   分区工作台
                 </h2>
               </div>
@@ -328,10 +386,10 @@ export default function DashboardPage() {
                     <Badge tone="info">{currentRole.title}</Badge>
                     <Badge tone="warning">{currentRole.focus}</Badge>
                   </div>
-                  <h3 className="display-title mt-5 text-[2rem] font-semibold leading-[0.94] text-white">
+                  <h3 className="display-title mt-5 text-[1.55rem] font-semibold leading-[0.98] text-white">
                     当前角色工作摘要
                   </h3>
-                  <p className="mt-4 max-w-2xl text-sm leading-8 text-slate-300">
+                  <p className="mt-4 max-w-2xl text-[14px] leading-8 text-slate-300">
                     {currentRole.summary} PowerOS 会主动把相关事件、现场、设备与智能体建议压缩进一张工作台，而不是让使用者在传统菜单和报表之间反复切换。
                   </p>
 
