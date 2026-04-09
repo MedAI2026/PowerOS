@@ -46,11 +46,11 @@ export default function LoginPage() {
               <div className="text-[10px] uppercase tracking-[0.38em] text-cyan-200/66">
                 PowerOS Runtime
               </div>
-              <div className="mt-6 max-w-4xl">
-                <div className="display-title text-[2.35rem] font-semibold leading-[0.92] text-white md:text-[3.3rem] xl:text-[4.1rem]">
+              <div className="mt-6 max-w-4xl space-y-1.5 md:space-y-2">
+                <div className="display-title text-[2.35rem] font-semibold leading-[0.98] text-white md:text-[3.3rem] xl:text-[4.1rem]">
                   电厂智能体
                 </div>
-                <div className="display-title text-[2.35rem] font-semibold leading-[0.92] text-white md:text-[3.3rem] xl:text-[4.1rem]">
+                <div className="display-title text-[2.35rem] font-semibold leading-[0.98] text-white md:text-[3.3rem] xl:text-[4.1rem]">
                   原生操作系统
                 </div>
               </div>
