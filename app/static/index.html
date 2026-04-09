@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus Power</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Nexus Power</p>
+          <h1>智慧电厂 Agentic-Mesh 领航看板</h1>
+          <p class="hero-text">
+            通过语义总线、多智能体协作和生成式分析画布，把生产管控与经营决策压缩到同一条实时认知链路里。
+          </p>
+        </div>
+        <div class="hero-halo">
+          <div class="halo-ring"></div>
+          <div class="halo-content">
+            <span>实时联动</span>
+            <strong id="hero-kpi">--</strong>
+            <small>当前获利能力</small>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel panel-large command-panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Generative Interface</p>
+              <h2>对话式任务注入</h2>
+            </div>
+            <span class="status-pill" id="active-title">当前无激活任务</span>
+          </div>
+          <form id="chat-form" class="command-form">
+            <textarea
+              id="chat-input"
+              rows="3"
+              placeholder="例如：15 分钟后强降温，负荷将上升，现货电价上涨 200%"
+            ></textarea>
+            <div class="command-actions">
+              <button type="submit" class="btn btn-primary">提交指令</button>
+              <button type="button" class="btn" data-scenario="weather-ramp">注入寒潮场景</button>
+              <button type="button" class="btn" data-scenario="asset-clinic">注入数字门诊</button>
+            </div>
+          </form>
+          <div class="chat-response" id="chat-response">
+            系统就绪。你可以直接触发寒潮、电价、轴承振动或检修相关事件。
+          </div>
+        </section>
+
+        <section class="metrics-grid" id="metrics-grid"></section>
+
+        <section class="panel panel-large workspace-panel">
+          <div class="panel-head workspace-head">
+            <div>
+              <p class="panel-kicker">Adaptive Workspace</p>
+              <h2>分区工作台</h2>
+            </div>
+            <div class="tab-bar" role="tablist" aria-label="工作台视图切换">
+              <button type="button" class="tab-button active" data-tab-target="overview" aria-selected="true">
+                总览
+              </button>
+              <button type="button" class="tab-button" data-tab-target="reasoning" aria-selected="false">
+                推理
+              </button>
+              <button type="button" class="tab-button" data-tab-target="observability" aria-selected="false">
+                观测
+              </button>
+            </div>
+          </div>
+
+          <div class="tab-panel active" data-tab-panel="overview">
+            <div class="workspace-grid">
+              <article class="workspace-card span-8">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Agentic Reasoning</p>
+                    <h3>智能体协作网格</h3>
+                  </div>
+                  <span class="status-pill subtle">5 个核心智能体</span>
+                </div>
+                <div class="agent-mesh" id="agent-mesh"></div>
+              </article>
+
+              <article class="workspace-card span-4">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Consensus</p>
+                    <h3>决策建议与权衡</h3>
+                  </div>
+                </div>
+                <div id="recommendation-card" class="recommendation-card empty">
+                  暂无决策建议。请先触发一个演示场景。
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="reasoning">
+            <div class="workspace-grid">
+              <article class="workspace-card span-7">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Mission Control</p>
+                    <h3>推理透明化看板</h3>
+                  </div>
+                </div>
+                <div class="scroll-region">
+                  <div class="reasoning-board" id="reasoning-board"></div>
+                </div>
+              </article>
+
+              <article class="workspace-card span-5">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Causal Graph</p>
+                    <h3>因果链路</h3>
+                  </div>
+                </div>
+                <div class="scroll-region">
+                  <div id="causal-chain" class="causal-chain empty">
+                    等待智能体生成动态因果链。
+                  </div>
+                </div>
+              </article>
+
+              <article class="workspace-card span-12">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Knowledge Trace</p>
+                    <h3>证据与经验来源</h3>
+                  </div>
+                </div>
+                <div class="scroll-region compact-region">
+                  <div id="evidence-list" class="evidence-list empty">
+                    触发场景后，这里会显示工业知识库检索结果。
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="observability">
+            <div class="workspace-grid">
+              <article class="workspace-card span-6">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Semantic Observation</p>
+                    <h3>统一语义总线</h3>
+                  </div>
+                </div>
+                <div class="scroll-region">
+                  <div class="bus-feed" id="semantic-feed"></div>
+                </div>
+              </article>
+
+              <article class="workspace-card span-6">
+                <div class="workspace-card-head">
+                  <div>
+                    <p class="panel-kicker">Control Log</p>
+                    <h3>实时事件时间线</h3>
+                  </div>
+                </div>
+                <div class="scroll-region">
+                  <div id="timeline" class="timeline"></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

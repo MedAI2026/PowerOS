@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+*.tsbuildinfo
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local env
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+
+# Demo runtime artifacts
+poweros-web/node_modules/
+poweros-web/dist/
