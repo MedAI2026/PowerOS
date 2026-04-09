@@ -39,6 +39,20 @@ npm run dev
 npm run build
 ```
 
+## 演示部署
+
+仓库已经补好两套部署配置：
+
+- GitHub Pages: [https://medai2026.github.io/PowerOS/](https://medai2026.github.io/PowerOS/)
+- Vercel: 仓库根目录已提供 `vercel.json`，导入仓库后可直接识别构建输出
+
+说明：
+
+- GitHub Pages 构建来自仓库根目录下的 `.github/workflows/deploy-pages.yml`
+- Pages 发布时会自动注入 `/PowerOS/` 作为静态资源基路径
+- 为兼容 Pages 静态托管，前端会在 `github.io` 域名下自动切换为 hash 路由
+- Vercel 已配置 SPA rewrite，页面刷新不会丢路由
+
 ## 已实现页面
 
 - `/` PowerOS 总控台

@@ -1,5 +1,5 @@
 import { Suspense, lazy, type ReactNode } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, createHashRouter } from "react-router-dom";
 
 import AppShell from "../layouts/AppShell";
 
@@ -27,7 +27,7 @@ function withSuspense(node: ReactNode) {
   );
 }
 
-export const router = createBrowserRouter([
+const routes = [
   {
     path: "/",
     element: <AppShell />,
@@ -43,4 +43,11 @@ export const router = createBrowserRouter([
       { path: "executive", element: withSuspense(<ExecutivePage />) },
     ],
   },
-]);
+];
+
+const isGithubPages =
+  typeof window !== "undefined" && window.location.hostname.endsWith("github.io");
+
+export const router = isGithubPages
+  ? createHashRouter(routes)
+  : createBrowserRouter(routes);
