@@ -52,6 +52,7 @@ npm run build
 - Pages 发布时会自动注入 `/PowerOS/` 作为静态资源基路径
 - 为兼容 Pages 静态托管，前端会在 `github.io` 域名下自动切换为 hash 路由
 - Vercel 已配置 SPA rewrite，页面刷新不会丢路由
+- 后续任意推送到 `poweros-web/` 目录都会自动触发 GitHub Pages 发布流程
 
 ## 已实现页面
 
