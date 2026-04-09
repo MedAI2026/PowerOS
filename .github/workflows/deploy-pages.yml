@@ -23,7 +23,10 @@ jobs:
         working-directory: poweros-web
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,7 +42,7 @@ jobs:
         run: VITE_BASE="/${{ github.event.repository.name }}/" npm run build
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: poweros-web/dist
 
